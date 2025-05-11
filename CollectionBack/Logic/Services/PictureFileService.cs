@@ -1,6 +1,6 @@
 ﻿namespace ComparerBasic.Logic.Services;
 
-public class EmployeeService 
+public class PictureFileService 
 {
         
 }

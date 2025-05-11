@@ -8,7 +8,7 @@ public class CollectionContext :
     ICollectionContext
 {
     public DbSet<PictureFileInfo> PictureFileInfos => Set<PictureFileInfo>();
-    public DbSet<SpoonInfo> SpoonInfos => Set<SpoonInfo>();
+    // public DbSet<SpoonInfo> SpoonInfos => Set<SpoonInfo>();
     
     public CollectionContext(DbContextOptions options)
         : base(options)
