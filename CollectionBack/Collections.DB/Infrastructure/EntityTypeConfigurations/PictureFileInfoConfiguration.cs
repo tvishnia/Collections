@@ -1,8 +1,8 @@
-﻿using CollectionBasic.Domain;
+﻿using Collections.DB.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CollectionBasic.Infrastructure.EntityTypeConfigurations;
+namespace Collections.DB.Infrastructure.EntityTypeConfigurations;
 
 internal class PictureFileInfoConfiguration : IEntityTypeConfiguration<PictureFileInfo>
 {

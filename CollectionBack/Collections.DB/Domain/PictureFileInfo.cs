@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CollectionBasic.Domain;
+﻿namespace Collections.DB.Domain;
 
 /// <summary>
 /// PictureFileInfo
