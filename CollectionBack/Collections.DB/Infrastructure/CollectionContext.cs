@@ -1,19 +1,14 @@
-﻿using CollectionBasic.Domain;
+﻿using Collections.DB.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace CollectionBasic.Infrastructure;
+namespace Collections.DB.Infrastructure;
 
-public class CollectionContext : 
-    DbContext, 
+public class CollectionContext(DbContextOptions options) :
+    DbContext(options),
     ICollectionContext
 {
     public DbSet<PictureFileInfo> PictureFileInfos => Set<PictureFileInfo>();
     // public DbSet<SpoonInfo> SpoonInfos => Set<SpoonInfo>();
-    
-    public CollectionContext(DbContextOptions options)
-        : base(options)
-    {
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,28 +1,22 @@
-
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ComparerBasic.Controllers;
+namespace PicsService.Controllers;
 
 [Produces("application/json")]
 [ApiController]
 [Route("api/[controller]")]
-public class PictureController : ControllerBase
+public class PictureController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator _mediator;
+    private readonly IMediator _mediator = mediator;
     
-    readonly static string homePath = (Environment.OSVersion.Platform == PlatformID.Unix ||
-                                       Environment.OSVersion.Platform == PlatformID.MacOSX)
+    static readonly string HomePath = ((Environment.OSVersion.Platform == PlatformID.Unix ||
+                                        Environment.OSVersion.Platform == PlatformID.MacOSX)
         ? Environment.GetEnvironmentVariable("HOME")
-        : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+        : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%")) ?? string.Empty;
 
-    readonly string guacHomePath = Path.Combine(homePath, "guac");
-    public PictureController(IMediator mediator)
-    {
-        _mediator = mediator;
-        // Get home directory based on if os is Windows or Unix - add guac directory Ex: "/home/user/guac"
-        
-    }
+    private readonly string _guacHomePath = Path.Combine(HomePath, "guac");
+    // Get home directory based on if os is Windows or Unix - add guac directory Ex: "/home/user/guac"
     // get list, create, update, delete
 
     // GET api/file/downlaod
@@ -34,7 +28,7 @@ public class PictureController : ControllerBase
     [HttpGet("download/{id}")]
     public async Task<IActionResult> Download(string id)
     {
-        string path = Path.Combine(guacHomePath, id);
+        string path = Path.Combine(_guacHomePath, id);
 
         if (System.IO.File.Exists(path))
         {
@@ -64,8 +58,8 @@ public class PictureController : ControllerBase
         string newFileName = DateTime.Now.Ticks + "_" + Guid.NewGuid().ToString();
 
         // Verify the home-guac directory exists, and combine the home-guac directory with the new file name
-        Directory.CreateDirectory(guacHomePath);
-        var filePath = Path.Combine(guacHomePath, newFileName);
+        Directory.CreateDirectory(_guacHomePath);
+        var filePath = Path.Combine(_guacHomePath, newFileName);
 
         // Create a new file in the home-guac directory with the newly generated file name
         using (var stream = new FileStream(filePath, FileMode.Create))

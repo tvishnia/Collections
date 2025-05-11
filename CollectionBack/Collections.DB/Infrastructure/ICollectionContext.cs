@@ -1,4 +1,4 @@
-﻿namespace CollectionBasic.Infrastructure;
+﻿namespace Collections.DB.Infrastructure;
 
 public interface ICollectionContext
 {

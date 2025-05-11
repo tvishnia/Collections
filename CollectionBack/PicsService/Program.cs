@@ -1,7 +1,9 @@
 
-using Microsoft.EntityFrameworkCore;
+
 using System.Reflection;
-using CollectionBasic.Infrastructure;
+using Collections.DB.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,7 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 using var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetService<ICollectionContext>();
 (scope.ServiceProvider.GetService<CollectionContext>() 
  ?? throw new Exception(message: "Can't migrate database"))
     .Database.Migrate();
@@ -39,3 +42,4 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
+
