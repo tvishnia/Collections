@@ -6,13 +6,13 @@ using CollectionBasic.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
 // read connection string section
-var db = builder.Configuration.GetConnectionString("mongo");
+var db = builder.Configuration.GetConnectionString("postgres");
 
 if (db == null || db.Equals(""))
 {
     throw new Exception("db string is empty");
 }
-builder.Services.AddDbContext<ICollectionContext, CollectionContext>(opt => opt.UseMongoDB(db));
+builder.Services.AddDbContext<ICollectionContext, CollectionContext>(opt => opt.UseNpgsql(db));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

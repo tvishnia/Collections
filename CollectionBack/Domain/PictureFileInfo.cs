@@ -17,6 +17,8 @@ public class PictureFileInfo
     /// </summary>
     public string FileName { get; init; } = string.Empty;
 
-
-    
+    // /// <summary>
+    // /// File Description
+    // /// </summary>
+    // public string FileDescription { get; init; } = string.Empty;
 }
